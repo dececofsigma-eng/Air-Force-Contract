@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Air Force Enlistment Contract</title>
+
+    <style>
+        body{
+            font-family: Dancing Script, cursive;
+            background:#dcecff;
+            text-align:center;
+            overflow:hidden;
+        }
+
+        h1{
+            margin-top:30px;
+        }
+
+        button{
+            padding:15px 30px;
+            font-size:20px;
+            cursor:pointer;
+        }
+
+        #yesBtn{
+            background:green;
+            color:white;
+            border:none;
+        }
+
+        #noBtn{
+            position:absolute;
+            background:red;
+            color:white;
+            border:none;
+        }
+
+        #gifPlaceholder{
+            width:500px;
+            height:300px;
+            margin:30px auto;
+            border:5px dashed black;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:28px;
+            font-weight:bold;
+            background:white;
+        }
+
+        #warning{
+            font-size:24px;
+            color:darkred;
+            font-weight:bold;
+            min-height:50px;
+        }
+
+        #contract{
+            display:none;
+            width:700px;
+            margin:20px auto;
+            background:white;
+            border:3px solid black;
+            padding:25px;
+            text-align:left;
+            position:relative;
+        }
+
+        #signedStamp{
+            display:none;
+            position:absolute;
+            top:120px;
+            left:150px;
+            font-size:90px;
+            font-weight:bold;
+            color:red;
+            border:8px solid red;
+            padding:10px 20px;
+            transform:rotate(-15deg);
+            opacity:0.8;
+        }
+
+        #contract h2{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>UNITED STATES AIR FORCE ENLISTMENT CONTRACT</h1>
+
+    <div id="gifPlaceholder">
+         <img
+        src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHAyZzdsMHRuMDlnejliMXBvMmo3MDBwbDF4Z3p4dHJzNzd4OXd4OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WHBEEmMRaxKiy68wa2/giphy.gif"
+        alt="Recruitment GIF"
+        style="width:100%; height:100%; object-fit:contain;"
+    >
+    </div>
+
+    <p>
+        Do you agree to serve a totally voluntary
+        6-year Air Force contract?
+    </p>
+
+    <button id="yesBtn">YES</button>
+    <button id="noBtn">NO</button>
+
+    <div id="warning"></div>
+
+    <div id="contract">
+        <h2>ENLISTMENT CONTRACT</h2>
+
+        <p>
+            By clicking YES, you agree to:
+        </p>
+
+        <ul>
+            <li>Serve 6 years.</li>
+            <li>Listen to PowerPoint presentations.</li>
+            <li>Drink questionable energy drinks.</li>
+            <li>Answer "Yes Sergeant" even when confused.</li>
+            <li>Accept that turning back is no longer an option.</li>
+        </ul>
+
+        <p>
+            Signature: 𝔊𝔢𝔫𝔢𝔯𝔞𝔩 𝔅𝔢𝔫𝔤𝔩𝔢𝔯𝔱
+        </p>
+
+        <div id="signedStamp">
+            SIGNED
+        </div>
+    </div>
+
+    <audio id="airForceSong">
+        <source src="airforce-song.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+        const warning = document.getElementById("warning");
+
+        const messages = [
+            "Nice try.",
+            "Too late.",
+            "The Marines warned us about you.",
+            "The Coast Guard warned us too.",
+            "Your recruiter is approaching rapidly.",
+            "Escape attempt detected.",
+            "Contract avoidance is futile.",
+            "You were already volunteered.",
+            "Command has denied your request.",
+            "The Air Force finds your hesitation suspicious.",
+            "Denial button unavailable.",
+            "Return to formation immediately."
+        ];
+
+        const buttonNames = [
+            "NO",
+            "Nice Try",
+            "Too Late",
+            "Denied",
+            "Escape",
+            "Run",
+            "Decline",
+            "Absolutely Not",
+            "Help",
+            "Recruiter?"
+        ];
+
+        function moveButton(){
+
+            const maxX = window.innerWidth - 150;
+            const maxY = window.innerHeight - 80;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+
+            warning.innerHTML =
+                messages[Math.floor(Math.random()*messages.length)];
+
+            noBtn.innerHTML =
+                buttonNames[Math.floor(Math.random()*buttonNames.length)];
+        }
+
+        noBtn.addEventListener("mouseover", moveButton);
+
+        noBtn.addEventListener("click", moveButton);
+
+        yesBtn.addEventListener("click", function(){
+
+            document.getElementById("contract").style.display = "block";
+
+            document.getElementById("signedStamp").style.display = "block";
+
+            document.getElementById("airForceSong").play();
+
+            warning.innerHTML =
+                "✈ CONTRACT ACCEPTED. WELCOME TO THE AIR FORCE.";
+        });
+
+        moveButton();
+    </script>
+
+</body>
+</html>
